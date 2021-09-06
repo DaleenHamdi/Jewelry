@@ -1,0 +1,17 @@
+<html>
+	<head>
+	<link th:href = "@{/css/style.css}"rel="stylesheet">
+	<title> edit a product</title>
+	</head>
+
+	<body>
+		<form action="#" th:action="'/update-product/'+${product.id}" th:object= "${product}" method ="post">
+			<input type="text" th:field= "*{name}" th:placeholder="#{product.name}" />
+			<input type="text" th:field= "*{material}" th:placeholder="#{product.material}"/>
+			<input type="text" th:field= "*{price}" th:placeholder="#{product.price}"/>
+			
+			<input type="submit">
+			
+		</form>
+	</body>
+</html>
