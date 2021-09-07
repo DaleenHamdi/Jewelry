@@ -43,7 +43,8 @@ public class ColorsService {
 		if(colorOpt.isPresent())
 		{
 			Colors newColor = colorOpt.get();
-			newColor.setColor (color.getColor());
+			if (color.getColor() != null)
+				newColor.setColor (color.getColor());
 			colorsRepo.save(newColor);
 			return newColor;
 		}

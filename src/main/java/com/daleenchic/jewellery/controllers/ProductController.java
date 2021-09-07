@@ -59,6 +59,8 @@ public class ProductController {
 	return productService.getProductsByBrandId(id);
 	}
 	
+
+	
 //	I want to get all products for this collection
 	@GetMapping (value="/collection/{id}/products")
 	public @ResponseBody List<Product> getProductsByCollectionId (@PathVariable Integer id){
