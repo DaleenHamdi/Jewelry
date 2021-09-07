@@ -45,10 +45,14 @@ public class ClientService {
 		if(clientOpt.isPresent())
 		{
 			Client newClient = clientOpt.get();
-			newClient.setFirstName(client.getFirstName());
-			newClient.setLastName(client.getLastName());
-			newClient.setEmail(client.getEmail());
-			newClient.setPhone(client.getPhone());
+			if (client.getFirstName() != null)
+				newClient.setFirstName(client.getFirstName());
+			if (client.getLastName() != null)
+				newClient.setLastName(client.getLastName());
+			if (client.getEmail() != null )
+				newClient.setEmail(client.getEmail());
+			if (client.getPhone() != null)
+				newClient.setPhone(client.getPhone());
 			clientRepo.save(newClient);
 			return newClient;
 		}

@@ -44,7 +44,8 @@ public class OrderService {
 		if(orderOpt.isPresent())
 		{
 			Order newOrder = orderOpt.get();
-			newOrder.setDate(order.getDate());
+			if (order.getDate() != null)
+				newOrder.setDate(order.getDate());
 			orderRepo.save(newOrder);
 			return newOrder;
 		}

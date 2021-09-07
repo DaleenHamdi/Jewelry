@@ -44,7 +44,8 @@ public class CollectionService {
 		if(collectionOpt.isPresent())
 		{
 			Collection newCollection = collectionOpt.get();
-			newCollection.setName(collection.getName());
+			if (collection.getName() != null)
+				newCollection.setName(collection.getName());
 			collectionRepo.save(newCollection);
 
 			return newCollection;

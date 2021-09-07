@@ -17,6 +17,7 @@ public class ProductService {
 	@Autowired 
 	private ProductRepo productRepo;
 	
+	
 	public List<Product> getAllProducts()
 	{
 		return productRepo.findAll();
@@ -34,15 +35,13 @@ public class ProductService {
 	
 	public Product create (Product product)
 	{
-		
-//		if(isInEnum(product.getType().toString(),ProductType.class))
-//		{
+//			List <Colors> productColor = product.getColors();
+//			if (productColor != null)
+//				for(int i = 0; i<productColor.size();i++)
+//					productColor.get(i);
 			productRepo.save(product);
 			return product;	
-//		}
-//		throw new IllegalArgumentException(
-//					"Unknown enum type " + product.getType() + ", Allowed values are " + Arrays.toString(ProductType.values())
-//					);
+
 	}
 	
 	
@@ -52,14 +51,22 @@ public class ProductService {
 		if(productOpt.isPresent())
 		{
 			Product newProduct = productOpt.get();
-			newProduct.setName(product.getName());
-			newProduct.setMaterial(product.getMaterial());
-			newProduct.setPrice(product.getPrice());
-			newProduct.setType(product.getType());
-			newProduct.setColors(product.getColors());
-			newProduct.setBrand(product.getBrand());
-			newProduct.setCollections(product.getCollections());
-			newProduct.setOrderInfos(product.getOrderInfos());
+			if (product.getName() != null)
+				newProduct.setName(product.getName());
+			if(product.getMaterial() != null)
+				newProduct.setMaterial(product.getMaterial());
+			if(product.getPrice() != 0)
+				newProduct.setPrice(product.getPrice());
+			if(product.getType() != null)
+				newProduct.setType(product.getType());
+			if(product.getColors() != null)
+				newProduct.setColors(product.getColors());
+			if(product.getBrand() != null)
+				newProduct.setBrand(product.getBrand());
+			if(product.getCollections() != null)
+				newProduct.setCollections(product.getCollections());
+			if(product.getOrderInfos() != null)
+				newProduct.setOrderInfos(product.getOrderInfos());
 			productRepo.save(newProduct);
 			return newProduct;
 		
@@ -88,9 +95,6 @@ public class ProductService {
 	public List<Product> getProductsByCollectionId(Integer id) {
 		return productRepo.findAllByCollectionsId(id);
 	}
+
 	
-//	public boolean isInEnum(String value, Class <ProductType> type) 
-//	{
-//	    return Arrays.stream(type.getEnumConstants()).anyMatch(e -> e.name().equals(value));
-//	}
 }

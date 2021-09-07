@@ -19,15 +19,15 @@ public class OrderInfo {
 
 
 
-	@ManyToOne(fetch=FetchType.LAZY,optional = false)
+	@ManyToOne(fetch=FetchType.EAGER,optional = false)
 	@JoinColumn(name = "order_id", insertable = false, updatable = false)
 	private Order orders;
 	
-	@ManyToOne(fetch=FetchType.LAZY,optional = false)
+	@ManyToOne(fetch=FetchType.EAGER,optional = false)
 	@JoinColumn(name = "product_id", insertable = false, updatable = false)
 	private Product products;
 	
-	@ManyToOne(fetch=FetchType.LAZY,optional = false)
+	@ManyToOne(fetch=FetchType.EAGER,optional = false)
 	@JoinColumn(name = "client_id", insertable = false, updatable = false)
 	private Client client;
 
