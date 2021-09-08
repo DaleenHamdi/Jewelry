@@ -47,6 +47,7 @@ public class BrandService {
 				Brand newBrand = brandOpt.get();
 				if (brand.getName() != null)
 					newBrand.setName(brand.getName());
+				
 				else
 					newBrand.setName(newBrand.getName());
 				brandRepo.save(newBrand);

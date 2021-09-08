@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.daleenchic.jewellery.dtos.ProductIdDTO;
 import com.daleenchic.jewellery.models.Collection;
 import com.daleenchic.jewellery.services.CollectionService;
 
@@ -50,6 +51,14 @@ public class CollectionController {
 	public void deleteCollection (@PathVariable Integer id)
 	{
 		collectionService.delete(id);
+	}
+	
+//	add product to collection 
+	@PutMapping(value="/collection/{collectionId}")
+	public @ResponseBody Collection addProductToCollection (@PathVariable Integer collectionId,
+			@RequestBody ProductIdDTO productId)
+	{
+		return collectionService.addProductForCollection(productId.getProductId(), collectionId);
 	}
 	
 	

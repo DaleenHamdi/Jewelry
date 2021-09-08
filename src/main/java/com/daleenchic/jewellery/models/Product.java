@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -33,19 +34,28 @@ public class Product {
 	
 	
 //	Relations
-	@ManyToMany (mappedBy = "products")
+	@ManyToMany()
+	@JoinTable(name="product_color",
+				joinColumns= @JoinColumn(name="product_id"),
+				inverseJoinColumns = @JoinColumn(name = "color_id"))
     private List<Colors> colors;
 	
-	@ManyToMany (mappedBy = "products")
+	
+	@ManyToMany()
+	@JoinTable(name="product_collection",
+			joinColumns= @JoinColumn(name="product_id"),
+			inverseJoinColumns = @JoinColumn(name = "collection_id"))
 	@JsonIgnore
     private List<Collection> collections;
+	
+	
 	
 	@OneToMany(mappedBy = "products")
 	@JsonIgnore
     private List<OrderInfo> orderInfos;
 	
-	@ManyToOne(fetch=FetchType.LAZY,optional = false)
-	@JoinColumn(name="brand_id", insertable = false, updatable = false)
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JoinColumn(name="brand_id")
 	private Brand brand;
 	
 //	Getters and Setters
@@ -130,5 +140,9 @@ public class Product {
 	public Product() {
 	}
 
+	public void addColor (Colors color)
+	{
+		this.colors.add(color);
+	}
 
 }

@@ -2,7 +2,6 @@ package com.daleenchic.jewellery.models;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,7 +21,7 @@ public class Colors {
 	private String color;
 	
 //	Relations
-	@ManyToMany(cascade = CascadeType.ALL)
+	@ManyToMany()
 	@JoinTable(name="product_color",
 				joinColumns= @JoinColumn(name="color_id"),
 				inverseJoinColumns = @JoinColumn(name = "product_id"))

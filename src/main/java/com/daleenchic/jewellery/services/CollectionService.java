@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.daleenchic.jewellery.models.Collection;
+import com.daleenchic.jewellery.models.Product;
 import com.daleenchic.jewellery.repositories.CollectionRepo;
 
 @Service
@@ -16,6 +17,8 @@ public class CollectionService {
 
 	@Autowired
 	private CollectionRepo collectionRepo;
+	@Autowired
+	private ProductService productService;
 	
 	public List<Collection> getAllCollections()
 	{
@@ -64,6 +67,21 @@ public class CollectionService {
 		}
 		else
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Collection Not Found");	
+	}
+
+
+	public Collection addProductForCollection(Integer productId, Integer collectionId) 
+	{
+		Optional <Collection> optionalCollcetion = collectionRepo.findById(collectionId);
+		if (optionalCollcetion.isPresent())
+		{
+			Collection collection = optionalCollcetion.get();
+			Product product = productService.getProductById(productId);
+			collection.addProduct(product);
+			return collectionRepo.save(collection);
+		}
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND,"collection Not Found");
+	
 	}
 
 }
