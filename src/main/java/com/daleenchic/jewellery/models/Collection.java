@@ -2,7 +2,6 @@ package com.daleenchic.jewellery.models;
 
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,7 +21,7 @@ public class Collection {
 	private String name;
 	
 //	Relations
-	@ManyToMany(cascade=CascadeType.ALL)
+	@ManyToMany()
 	@JoinTable(name="product_collection",
 				joinColumns= @JoinColumn(name="collection_id"),
 				inverseJoinColumns = @JoinColumn(name = "product_id"))
@@ -61,5 +60,8 @@ public class Collection {
 	} 
 	
 	
-	
+	public void addProduct (Product product)
+	{
+		this.products.add(product);
+	}
 }

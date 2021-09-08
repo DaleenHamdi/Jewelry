@@ -24,7 +24,7 @@ public class Brand {
 	
 	@OneToMany(mappedBy ="brand",
 			fetch=FetchType.LAZY,
-			cascade=CascadeType.REMOVE)
+			cascade=CascadeType.ALL)
 	@JsonIgnore
 	private List<Product> products;
 	
