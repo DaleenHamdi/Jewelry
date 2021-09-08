@@ -134,4 +134,20 @@ public class ProductService {
 											.collect(Collectors.toList());
 		return products;
 		}
+
+
+	public void deletFromProduct(Integer colorId, Integer productId) 
+	{
+			Optional <Product> optionalProduct = productRepo.findById(productId);
+			if (optionalProduct.isPresent())
+			{
+				Product product = optionalProduct.get();
+				Colors color = colorsService.getColorById(colorId);
+				product.removeColor(color);
+				productRepo.save(product);
+			}
+			else
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"product Not Found");
+		
+		}
 }

@@ -11,6 +11,8 @@ import com.daleenchic.jewellery.models.OrderInfoId;
 @Repository
 public interface OrderInfoRepo  extends CrudRepository <OrderInfo,OrderInfoId>{
 	public List<OrderInfo> findAll();
+	public List<OrderInfo> findAllById(OrderInfoId id);
 	public List<OrderInfo> findAllByClientId(Integer Id);
-
+	public List<OrderInfo> findByProductsIdAndClientId(Integer productId,Integer clientId);
+	public List<OrderInfo> findAllByOrdersId(Integer Id);
 }

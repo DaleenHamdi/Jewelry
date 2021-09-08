@@ -2,7 +2,9 @@ package com.daleenchic.jewellery.models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -22,7 +24,9 @@ public class Client {
 	private String phone;
 	
 //	Relations
-	@OneToMany(mappedBy = "client")
+	@OneToMany(mappedBy = "client",
+			fetch=FetchType.LAZY,
+			cascade=CascadeType.ALL)
 	@JsonIgnore
     private List<OrderInfo> orderInfo;
 	

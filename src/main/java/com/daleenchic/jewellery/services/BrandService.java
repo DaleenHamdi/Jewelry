@@ -15,8 +15,8 @@ import com.daleenchic.jewellery.repositories.BrandRepo;
 @Service
 public class BrandService {
 
-	@Autowired
-	private BrandRepo brandRepo;
+		@Autowired
+		private BrandRepo brandRepo;
 	
 		public List<Brand> getAllBrands()
 		{
@@ -68,4 +68,4 @@ public class BrandService {
 			else
 				throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Brand Not Found");	
 		}
-}
+}	
