@@ -2,6 +2,7 @@ package com.daleenchic.jewellery.models;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -17,7 +18,6 @@ import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-//import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 @Entity (name = "product" )
@@ -50,7 +50,9 @@ public class Product {
 	
 	
 	
-	@OneToMany(mappedBy = "products")
+	@OneToMany(mappedBy = "products",
+			fetch=FetchType.LAZY,
+			cascade=CascadeType.ALL)
 	@JsonIgnore
     private List<OrderInfo> orderInfos;
 	
@@ -143,6 +145,11 @@ public class Product {
 	public void addColor (Colors color)
 	{
 		this.colors.add(color);
+	}
+	
+	public void removeColor(Colors color) {
+		this.colors.remove(color);
+		
 	}
 
 }

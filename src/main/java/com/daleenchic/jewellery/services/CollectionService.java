@@ -84,4 +84,20 @@ public class CollectionService {
 	
 	}
 
+
+	public void deletFromCollection(Integer productId, Integer collectionId) 
+	{
+		Optional <Collection> optionalCollcetion = collectionRepo.findById(collectionId);
+		if (optionalCollcetion.isPresent())
+		{
+			Collection collection = optionalCollcetion.get();
+			Product product = productService.getProductById(productId);
+			collection.removeProduct(product);
+			collectionRepo.save(collection);
+		}
+		else
+		throw new ResponseStatusException(HttpStatus.NOT_FOUND,"collection Not Found");
+	
+	}
+
 }

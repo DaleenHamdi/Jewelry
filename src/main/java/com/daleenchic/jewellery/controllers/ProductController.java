@@ -96,5 +96,14 @@ public class ProductController {
 		return productService.addColorForProduct(colorId.getColorId(), productId);
 	}
 	
+//	remove color from product 
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@DeleteMapping(value="/product/{productId}/{colorId}")
+	public void removeProductFromCollection (@PathVariable Integer productId,
+			@PathVariable Integer colorId)
+	{
+		productService.deletFromProduct(colorId, productId);
+	}
+	
 }
 

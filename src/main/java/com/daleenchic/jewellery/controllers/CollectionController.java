@@ -62,4 +62,12 @@ public class CollectionController {
 	}
 	
 	
+//	remove product from collection 
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	@DeleteMapping(value="/collection/{collectionId}/{productId}")
+	public void removeProductFromCollection (@PathVariable Integer collectionId,
+			@PathVariable Integer productId)
+	{
+		collectionService.deletFromCollection(productId, collectionId);
+	}
 }

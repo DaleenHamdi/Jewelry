@@ -8,8 +8,5 @@ public enum ProductType {
 	EARING,
 	ANKLET;
 	
-	
-	
-	
 }
 
