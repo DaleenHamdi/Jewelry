@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,8 +36,11 @@ public class OrderInfoController {
 	}
 	
 	@GetMapping (value ="/order/{id}/orderInfo")
-	public @ResponseBody List<OrderInfo> getOrdersInfoByOrderId (@PathVariable Integer id){
-		return orderInfoService.getOrdersInfoByOrderId(id);
+	public @ResponseBody List<OrderInfo> getOrdersInfoByOrderId (@RequestHeader("Authorization") String auth,
+			@PathVariable Integer id)
+	{  
+			return orderInfoService.getOrdersInfoByOrderId(id,auth);
+		
 	}
 	
 	@PutMapping(value="/orders/{orderId}/orderInfo")

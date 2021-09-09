@@ -3,6 +3,7 @@ package com.daleenchic.jewellery.services;
 import java.util.List;
 import java.util.Optional;
 
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -35,8 +36,17 @@ public class OrderInfoService {
 		return orderInfoRepo.findAllByClientId(id);
 	}
 	
-	public List<OrderInfo> getOrdersInfoByOrderId(Integer id) {
-		return orderInfoRepo.findAllByOrdersId(id);
+	public List<OrderInfo> getOrdersInfoByOrderId(Integer id,String auth) {
+		String encodedUsernamePassword = auth.substring("Basic ".length()).trim();
+		String usernamePassword =new String(Base64.decodeBase64(encodedUsernamePassword.getBytes()));
+
+		int seperatorIndex = usernamePassword.indexOf(':');
+		String userName = usernamePassword.substring(0, seperatorIndex);		
+		String provider ="Provider";
+		if (userName.equals(provider))
+			return orderInfoRepo.findAllByOrdersId(id);
+		throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"Unauthorized");
+
 	}
 
 	public OrderInfo addInfoForOrder(ClientOrderProductDTO clientProductId, Integer orderId)
