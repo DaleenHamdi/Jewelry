@@ -1,0 +1,27 @@
+<html>
+	<head>
+	<link th:href = "@{/css/style.css}"rel="stylesheet">
+	</head>
+
+	<body>
+		<div th:each="brand :${brands}">
+		
+			<h2 th:text= "${brand.id}"></h2> 
+			<h2 th:text= "${brand.name}"></h2> 
+			
+			<form action="#" th:action="'/delete-brand/'+${brand.id}" method ="delete">
+				<input type ="submit" value="delete"/>
+			</form>
+				<form action="#" th:action="'/edit-brand/'+${brand.id}" method ="get">
+				<input type ="submit" value="update"/>
+			</form>
+				<form action="#" th:action="'/brand-products/'+${brand.id}" method ="get">
+				<input type ="submit" value="view products"/>
+			</form>
+		<hr>
+		</div>
+		<form action="#" th:action="@{/brand}" method ="get">
+				<input type ="submit" value="Add New Brand"/>
+			</form>
+	</body>
+</html>
