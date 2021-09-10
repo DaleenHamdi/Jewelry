@@ -1,0 +1,15 @@
+<html>
+	<head>
+	<link th:href = "@{/css/style.css}"rel="stylesheet">
+	<title> create a brand</title>
+	</head>
+
+	<body>
+		<form action="#" th:action="@{/create-brand}" th:object= "${brand}" method ="post">
+			<input type="text" placeholder="name" th:field= "*{name}" />
+			
+			<input type="submit">
+			
+		</form>
+	</body>
+</html>

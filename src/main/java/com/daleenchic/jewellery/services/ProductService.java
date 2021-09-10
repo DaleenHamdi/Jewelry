@@ -2,15 +2,12 @@ package com.daleenchic.jewellery.services;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.daleenchic.jewellery.models.Brand;
-import com.daleenchic.jewellery.models.Colors;
 import com.daleenchic.jewellery.models.Product;
 import com.daleenchic.jewellery.repositories.ProductRepo;
 
@@ -19,10 +16,7 @@ public class ProductService {
 
 	@Autowired 
 	private ProductRepo productRepo;
-	@Autowired 
-	private BrandService brandService;
-	@Autowired 
-	private ColorsService colorsService;
+	
 	
 	public List<Product> getAllProducts()
 	{
@@ -77,6 +71,7 @@ public class ProductService {
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Product Not Found");	
 	}
 	
+	
 	public void delete (Integer id)
 	{
 		Optional <Product> productOpt= productRepo.findById(id);
@@ -88,66 +83,5 @@ public class ProductService {
 		else
 			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Product Not Found");	
 	}
-
-
-	public List<Product> getProductsByBrandId(Integer id) {
-		return productRepo.findAllByBrandId(id);
-	}
 	
-	public List<Product> getProductsByCollectionId(Integer id) {
-		return productRepo.findAllByCollectionsId(id);
-	}
-	
-	public List<Product> addBrandForProduct (Integer id, List<Product> products)
-	{
-		Brand brand = brandService.getBrandById(id);
-		products.stream().forEach(p->p.setBrand(brand));
-		productRepo.saveAll(products);
-		return products;
-	}
-	
-	public Product addColorForProduct (Integer colorId, Integer productId)
-	{
-		Optional <Product> optionalProduct = productRepo.findById(productId);
-		if (optionalProduct.isPresent())
-		{
-			Product product = optionalProduct.get();
-			Colors color = colorsService.getColorById(colorId);
-			product.addColor(color);
-			return productRepo.save(product);
-		}
-		throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Product Not Found");
-	}
-	
-	public List<Product> updateProductBrand (Integer id, List<Integer> productsId)
-	{
-		Brand brand = brandService.getBrandById(id);
-
-		productsId.stream().forEach(pI->
-		{
-		Product product = getProductById(pI);
-		product.setBrand(brand);
-		productRepo.save(product);
-		});
-		List<Product> products = productsId.stream()
-											.map(p->getProductById(p))
-											.collect(Collectors.toList());
-		return products;
-		}
-
-
-	public void deletFromProduct(Integer colorId, Integer productId) 
-	{
-			Optional <Product> optionalProduct = productRepo.findById(productId);
-			if (optionalProduct.isPresent())
-			{
-				Product product = optionalProduct.get();
-				Colors color = colorsService.getColorById(colorId);
-				product.removeColor(color);
-				productRepo.save(product);
-			}
-			else
-			throw new ResponseStatusException(HttpStatus.NOT_FOUND,"product Not Found");
-		
-		}
 }

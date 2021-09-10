@@ -1,0 +1,27 @@
+<html>
+	<head>
+	<link th:href = "@{/css/style.css}"rel="stylesheet">
+	</head>
+
+	<body>
+		<div th:each="product :${products}">
+		
+			<h2 th:text= "${product.id}"></h2> 
+			<h2 th:text= "${product.name}"></h2> 
+			<h2 th:text= "${product.price}"></h2> 
+			<h2 th:text= "${product.type}"></h2> 
+			<h2 th:text= "${product.material}"></h2> 
+			<form action="#" th:action="'/delete-product/'+${product.id}" method ="delete">
+				<input type ="submit" value="delete"/>
+			</form>
+			<form action="#" th:action="'/edit-product/'+${product.id}" method ="get">
+				<input type ="submit" value="update"/>
+			</form>
+		<hr>
+		</div>
+		<form action="#" th:action="@{/product}" method ="get">
+				<input type ="submit" value="Add New Product"/>
+			</form>
+	</body>
+</html>
+

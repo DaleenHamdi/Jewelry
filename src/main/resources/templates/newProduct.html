@@ -1,0 +1,23 @@
+<html>
+	<head>
+	<link th:href = "@{/css/style.css}"rel="stylesheet">
+	<title> create a product</title>
+	</head>
+
+	<body>
+		<form action="#" th:action="@{/create-product}" th:object= "${product}" method ="post">
+			<input type="text" placeholder="name" th:field="*{name}" />
+			<input type="text" placeholder="material" th:field= "*{material}" />
+			<select th:field="*{type}">
+			    <option th:value="RING" th:text="Ring"></option>
+			    <option th:value="BRACELET" th:text="Bracelet"></option>
+			   	<option th:value="NECKLACE" th:text="Necklace"></option>
+			    <option th:value="EARING" th:text="Earing"></option>
+			    <option th:value="ANKLET" th:text="Anklet"></option>
+			</select>
+			<label for="price">product price:</label>
+			<input type="text" id= "price"  th:field= "*{price}" />
+			<input type="submit">
+		</form>
+	</body>
+</html>

@@ -5,16 +5,6 @@
 
 	<body>
 		<h1> Welcome to our Project </h1>
-		<div th:each="product :${products}">
 		
-			<h2 th:text= "${product.id}"></h2> 
-			<h2 th:text= "${product.name}"></h2> 
-			<h2 th:text= "${product.price}"></h2> 
-			<h2 th:text= "${product.material}"></h2> 
-			<form action="#" th:action="'/delete-product/'+${product.id}" method ="delete">
-				<input type ="submit" value="delete"/>
-			</form>
-		<hr>
-		</div>
 	</body>
 </html>
