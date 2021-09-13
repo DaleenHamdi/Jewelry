@@ -15,7 +15,7 @@
 		      <a class="navbar-brand" href="home">DaleenChic</a>
 		    </div>
 		    <ul class="nav navbar-nav">
-		      <li><a href="home">Home</a></li>
+		      <li class="active"><a href="home">Home</a></li>
 		      <li><a href="all-brands">Brands</a></li>
 		      <li><a href="all-products">Products</a></li>
 		         <li><a href="collection">Collection</a></li>
@@ -24,6 +24,17 @@
 		    </ul>
 		  </div>
 		</nav>
-		<h1> you have successfully created </h1><h1 th:text= "${object}"></h1>
+	  	<form action="#" th:action="@{/brand/{id}/added (id=${brandId})}" method ="post">
+	  
+	  		<select th:name="productId">
+				<div th:each="product :${products}">
+			    <option th:value="${product.id}" th:text="${product.name}"></option>
+			</select>
+		<hr>
+		</div>
+				<input type ="submit" value="Add Products"/>
+			</form>
 	</body>
 </html>
+
+			

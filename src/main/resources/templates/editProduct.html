@@ -1,13 +1,39 @@
 <html>
 	<head>
 	<link th:href = "@{/css/style.css}"rel="stylesheet">
-	<title> edit a product</title>
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	</head>
 
 	<body>
+		<nav class="navbar navbar-default">
+		  <div class="container-fluid">
+		    <div class="navbar-header">
+		      <a class="navbar-brand" href="home">DaleenChic</a>
+		    </div>
+		    <ul class="nav navbar-nav">
+		      <li><a href="home">Home</a></li>
+		      <li><a href="all-brands">Brands</a></li>
+		      <li  class="active"><a href="all-products">Products</a></li>
+		      <li><a href="collection">Collection</a></li>
+		      <li><a href="client">Client</a></li>
+		      <li><a href="order-info-view">Order</a></li>
+		    </ul>
+		  </div>
+		</nav>
 		<form action="#" th:action="'/update-product/'+${product.id}" th:object= "${product}" method ="post">
 			<input type="text" th:field= "*{name}" th:placeholder="#{product.name}" />
 			<input type="text" th:field= "*{material}" th:placeholder="#{product.material}"/>
+			<select th:field="*{type}">
+			    <option th:value="RING" th:text="Ring"></option>
+			    <option th:value="BRACELET" th:text="Bracelet"></option>
+			   	<option th:value="NECKLACE" th:text="Necklace"></option>
+			    <option th:value="EARING" th:text="Earing"></option>
+			    <option th:value="ANKLET" th:text="Anklet"></option>
+			</select>
 			<input type="text" th:field= "*{price}" th:placeholder="#{product.price}"/>
 			
 			<input type="submit">

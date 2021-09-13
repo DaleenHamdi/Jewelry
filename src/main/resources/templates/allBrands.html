@@ -1,26 +1,69 @@
 <html>
 	<head>
 	<link th:href = "@{/css/style.css}"rel="stylesheet">
+	<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	</head>
 
 	<body>
-		<div th:each="brand :${brands}">
-		
-			<h2 th:text= "${brand.id}"></h2> 
-			<h2 th:text= "${brand.name}"></h2> 
-			
+		<nav class="navbar navbar-default">
+		  <div class="container-fluid">
+		    <div class="navbar-header">
+		      <a class="navbar-brand" href="home">DaleenChic</a>
+		    </div>
+		    <ul class="nav navbar-nav">
+		      <li><a href="home">Home</a></li>
+		      <li class="active"><a href="all-brands">Brands</a></li>
+		      <li><a href="all-products">Products</a></li>
+   			  <li><a href="collection">Collection</a></li>
+		      <li><a href="client">Client</a></li>
+		      <li><a href="order-info-view">Order</a></li>		   
+		      </ul>
+		  </div>
+		</nav>
+		<div class="container">
+		<h2> Brands</h2>
+		<table class="table table-condensed">
+		<thead>
+				<tr>
+		        <th>Brand Id</th>
+		        <th>Brand</th>
+		        <th>Delete</th>
+		        <th>Update</th>
+		        <th>View</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+			<div th:each="brand :${brands}">
+			<tr>
+        	<td>
+			<h4 th:text= "${brand.id}"></h4> </td>
+			<td>
+			<h4 th:text= "${brand.name}"></h4> 
+			</td>
+			<td>
 			<form action="#" th:action="'/delete-brand/'+${brand.id}" method ="delete">
 				<input type ="submit" value="delete"/>
 			</form>
-				<form action="#" th:action="'/edit-brand/'+${brand.id}" method ="get">
+			</td>
+			<td>	
+			<form action="#" th:action="'/edit-brand/'+${brand.id}" method ="get">
 				<input type ="submit" value="update"/>
 			</form>
-				<form action="#" th:action="'/brand-products/'+${brand.id}" method ="get">
+			</td>
+			<td>
+			<form action="#" th:action="'/brand-products/'+${brand.id}" method ="get">
 				<input type ="submit" value="view products"/>
 			</form>
-		<hr>
+			</td>
+		 </tr>
 		</div>
-		<form action="#" th:action="@{/brand}" method ="get">
+  	</tbody>
+  </table>
+			<form action="#" th:action="@{/brand}" method ="get">
 				<input type ="submit" value="Add New Brand"/>
 			</form>
 	</body>
