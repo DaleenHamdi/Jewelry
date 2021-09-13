@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.daleenchic.jewellery.dtos.ProductIdDTO;
 import com.daleenchic.jewellery.models.Brand;
 import com.daleenchic.jewellery.models.Product;
 import com.daleenchic.jewellery.services.BrandService;
@@ -132,5 +135,34 @@ public class HomeController {
 			List<Product> p= productBrandService.getProductsByBrandId(id);
 			model.addAttribute("products",p);
 			return "productsByBrand";
+		}
+		
+//		add Products to Brand 
+		@GetMapping("/brand/{id}/add")
+		public String addProductsToBrand(Model model,@PathVariable Integer id) {
+			List<Product> products = productService.getAllProducts();
+			model.addAttribute("products",products);
+			model.addAttribute("brandId",id);
+			return "checklist";
+		}
+		
+		@PostMapping("/brand/{id}/added")
+		public String addSuccessful(@PathVariable Integer id, Integer productId) {
+			productBrandService.updateOneProductBrand(id, productId);
+			return "editSuccessful";
+		}
+
+//		Page under constructor
+		@GetMapping ("/collection")
+		public String collection() {
+			return "pageUnderConstructor";
+		}
+		@GetMapping ("/client")
+		public String client() {
+			return "pageUnderConstructor";
+		}
+		@GetMapping ("/order-info-view")
+		public String orderInfo() {
+			return "pageUnderConstructor";
 		}
 } 
