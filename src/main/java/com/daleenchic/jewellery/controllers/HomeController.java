@@ -130,7 +130,9 @@ public class HomeController {
 		@GetMapping ("/brand-products/{id}")
 		public String showProductsByBrandId(Model model,@PathVariable Integer id) {
 			List<Product> p= productBrandService.getProductsByBrandId(id);
+			Brand brand = brandService.getBrandById(id);
 			model.addAttribute("products",p);
+			model.addAttribute("brand",brand);
 			return "productsByBrand";
 		}
 		
