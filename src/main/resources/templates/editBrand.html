@@ -25,8 +25,7 @@
 		  </div>
 		</nav>
 		<form action="#" th:action="'/update-brand/'+${brand.id}" th:object= "${brand}" method ="post">
-			<input type="text" th:field= "*{name}" th:placeholder="#{brand.name}" />
-					
+			<input type="text" th:field= "*{name}" th:placeholder="#{brand.name}" />					
 			<input type="submit">
 			
 		</form>
